@@ -755,13 +755,83 @@ header{
     border-radius: 18px;
   }
 
+  .open-form-btn{
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    border-radius: 40px;
+    padding: 16px 44px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .open-form-btn:hover{
+    background: var(--accent);
+    color: #08070d;
+  }
+
+  .modal-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,4,10,0.75);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.open{
+    display: flex;
+  }
+
+  .modal-box{
+    position: relative;
+    background: #0d0d18;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 20px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-close{
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .modal-close:hover{
+    color: var(--text-heading);
+  }
+
+  .modal-box iframe{
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
   @media (max-width: 700px){
     #booking{ padding: 56px 16px 72px; }
     h2{ font-size: 27px; }
     .subtitle{ font-size: 19px; }
+    .open-form-btn{ padding: 14px 32px; font-size: 14px; }
   }
-
-  .cta-link{ text-decoration: none; display: block; }
 </style>
 </head>
 <body>
@@ -932,9 +1002,9 @@ header{
         </ul>
         <div class="meta">Объём: 0,5 страницы А4</div>
         <div class="price-block">
-          <div class="price">Донейшен</div>
+          <div class="price">Без оплаты</div>
         </div>
-        <a class="cta-link" href="#booking"><button>Пиши мне в л/с</button></a>
+        <button onclick="document.getElementById('booking-modal').classList.add('open')">Пиши мне в л/с</button>
       </div>
 
       <div class="card">
@@ -950,7 +1020,7 @@ header{
           <div><span class="price old">7 000 ₽</span><span class="price">4 500 ₽</span></div>
           <div class="promo">Цена до 01.08.26</div>
         </div>
-        <a class="cta-link" href="#booking"><button>Пиши мне в л/с</button></a>
+        <button onclick="document.getElementById('booking-modal').classList.add('open')">Пиши мне в л/с</button>
       </div>
 
       <div class="card">
@@ -972,7 +1042,7 @@ header{
           <div><span class="price old">25 000 ₽</span><span class="price">15 000 ₽</span></div>
           <div class="promo">Цена до 01.08.26</div>
         </div>
-        <a class="cta-link" href="#booking"><button>Пиши мне в л/с</button></a>
+        <button onclick="document.getElementById('booking-modal').classList.add('open')">Пиши мне в л/с</button>
       </div>
 
     </div>
@@ -992,10 +1062,9 @@ header{
           <li>Сессия + 30 минут гармонизации состояния (дистанционно, по запросу в течение недели после сессии)</li>
         </ul>
         <div class="price-block">
-          <div><span class="price old">10 000 ₽</span><span class="price">8 000 ₽</span></div>
-          <div class="promo">Цена до 01.08.26</div>
+          <div class="price">По запросу</div>
         </div>
-        <a class="cta-link" href="#booking"><button>Пиши мне в л/с</button></a>
+        <button onclick="document.getElementById('booking-modal').classList.add('open')">Пиши мне в л/с</button>
       </div>
 
       <div class="card">
@@ -1007,10 +1076,9 @@ header{
           <li>2 практики, записанные специально для вас</li>
         </ul>
         <div class="price-block">
-          <div><span class="price old">35 000 ₽</span><span class="price">28 000 ₽</span></div>
-          <div class="promo">Цена до 01.08.26</div>
+          <div class="price">По запросу</div>
         </div>
-        <a class="cta-link" href="#booking"><button>Пиши мне в л/с</button></a>
+        <button onclick="document.getElementById('booking-modal').classList.add('open')">Пиши мне в л/с</button>
       </div>
 
       <div class="card">
@@ -1026,7 +1094,7 @@ header{
         <div class="price-block">
           <div class="price">По запросу</div>
         </div>
-        <a class="cta-link" href="#booking"><button>Пиши мне в л/с</button></a>
+        <button onclick="document.getElementById('booking-modal').classList.add('open')">Пиши мне в л/с</button>
       </div>
 
     </div>
@@ -1205,10 +1273,7 @@ header{
   <h2>Запись на консультацию</h2>
   <p class="subtitle">Оставьте заявку — я свяжусь с вами, чтобы уточнить детали и подобрать удобное время.</p>
 
-  <div class="form-wrap">
-    <script src="https://forms.yandex.ru/_static/embed.js"></script>
-    <iframe src="https://forms.yandex.ru/u/6a4bdeb2f47e731013a34a46?iframe=1" frameborder="0" name="ya-form-6a4bdeb2f47e731013a34a46" width="650"></iframe>
-  </div>
+  <button class="open-form-btn" onclick="document.getElementById('booking-modal').classList.add('open')">Записаться</button>
 
   </div>
   </section>
@@ -1218,6 +1283,14 @@ header{
 <footer class="site-footer">
   © Светлана Образцова — целитель, духовный наставник
 </footer>
+
+<div class="modal-overlay" id="booking-modal" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('booking-modal').classList.remove('open')">&times;</button>
+    <script src="https://forms.yandex.ru/_static/embed.js"></script>
+    <iframe src="https://forms.yandex.ru/u/6a4bdeb2f47e731013a34a46?iframe=1" frameborder="0" name="ya-form-6a4bdeb2f47e731013a34a46" width="650"></iframe>
+  </div>
+</div>
 
 </body>
 </html>
