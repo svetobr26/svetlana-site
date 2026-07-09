@@ -103,6 +103,69 @@
     .site-nav-links a{ font-size: 13px; }
   }
 
+  .cookie-banner{
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: #0d0d18;
+    border-top: 1px solid rgba(201,168,76,0.3);
+    padding: 20px 24px;
+  }
+
+  .cookie-banner.show{
+    display: flex;
+  }
+
+  .cookie-banner-inner{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cookie-banner-text{
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.85);
+    max-width: 780px;
+  }
+
+  .cookie-banner-text a{
+    color: #00B4D8;
+    text-decoration: underline;
+  }
+
+  .cookie-banner-btn{
+    flex-shrink: 0;
+    border: 2px solid #00B4D8;
+    background: transparent;
+    color: #00B4D8;
+    border-radius: 40px;
+    padding: 12px 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .cookie-banner-btn:hover{
+    background: #00B4D8;
+    color: #08070d;
+  }
+
+  @media (max-width: 700px){
+    .cookie-banner-inner{ flex-direction: column; align-items: flex-start; gap: 16px; }
+    .cookie-banner-btn{ width: 100%; text-align: center; }
+  }
+
 
   /* --- about --- */
 header{
@@ -1304,6 +1367,21 @@ header{
     <iframe src="https://forms.yandex.ru/u/6a4bdeb2f47e731013a34a46?iframe=1" frameborder="0" name="ya-form-6a4bdeb2f47e731013a34a46" width="650"></iframe>
   </div>
 </div>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-text">
+      Сайт использует cookie для аналитики посещений (Яндекс Метрика). Продолжая пользоваться сайтом, вы соглашаетесь с этим — подробнее в <a href="/personal_data_processing_policy">Политике обработки персональных данных</a>.
+    </div>
+    <button class="cookie-banner-btn" onclick="document.getElementById('cookie-banner').classList.remove('show'); localStorage.setItem('cookieConsent','1');">Принять</button>
+  </div>
+</div>
+
+<script>
+  if(!localStorage.getItem('cookieConsent')){
+    document.getElementById('cookie-banner').classList.add('show');
+  }
+</script>
 
 </body>
 </html>
