@@ -397,9 +397,9 @@ header{
   }
 
   .credential-divider{
-    color: #C9A84C;
+    color: var(--accent);
     font-size: 11px;
-    opacity: 0.65;
+    opacity: 0.55;
     letter-spacing: 2px;
     line-height: 1;
   }
@@ -408,9 +408,9 @@ header{
     display: flex;
     align-items: center;
     gap: 14px;
-    color: #C9A84C;
+    color: var(--accent);
     font-size: 12px;
-    opacity: 0.7;
+    opacity: 0.6;
   }
 
   .meaning-divider::before,
@@ -418,11 +418,11 @@ header{
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(to right, rgba(201,168,76,0.45), transparent);
+    background: linear-gradient(to right, rgba(0,180,216,0.4), transparent);
   }
 
   .meaning-divider::after{
-    background: linear-gradient(to left, rgba(201,168,76,0.45), transparent);
+    background: linear-gradient(to left, rgba(0,180,216,0.4), transparent);
   }
 
   .bio{
@@ -594,6 +594,27 @@ header{
     line-height: 1.55;
     color: var(--text-body);
     padding-top: 4px;
+  }
+
+  .footnote-mark{
+    color: var(--accent);
+    font-size: 12px;
+    margin-left: 1px;
+  }
+
+  .results-footnote{
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 760px;
+  }
+
+  .results-footnote .footnote-mark{
+    font-style: normal;
+    margin-right: 2px;
   }
 
   .info-box{
@@ -1254,7 +1275,7 @@ header{
 
       <div class="result-item">
         <div class="result-number">4</div>
-        <div class="result-text">Исцеление на физическом уровне.</div>
+        <div class="result-text">Исцеление на физическом уровне<sup class="footnote-mark">✻</sup>.</div>
       </div>
 
       <div class="result-item">
@@ -1263,6 +1284,8 @@ header{
       </div>
 
     </div>
+
+    <p class="results-footnote"><sup class="footnote-mark">✻</sup> Я работаю с энергетическим и кармическим уровнем — тем, что стоит за симптомом, на тонких телах. Когда снимается напряжение и блоки там, у тела появляется пространство для восстановления, и я подключаю техники, которые этому способствуют. Это не лечение и не медицинская процедура, она не заменяет наблюдение у врача — при физических симптомах и заболеваниях обращайся к специалисту.</p>
 
     <div class="info-box">
       <p><b>Длительность обсуждается индивидуально.</b> Всё зависит от запроса, состояния и готовности активно работать и меняться, действовать.</p>
