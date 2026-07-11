@@ -396,6 +396,35 @@ header{
     font-weight: 600;
   }
 
+  .credential-divider{
+    color: #C9A84C;
+    font-size: 11px;
+    opacity: 0.65;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .meaning-divider{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #C9A84C;
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  .meaning-divider::before,
+  .meaning-divider::after{
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(201,168,76,0.45), transparent);
+  }
+
+  .meaning-divider::after{
+    background: linear-gradient(to left, rgba(201,168,76,0.45), transparent);
+  }
+
   .bio{
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
@@ -818,6 +847,41 @@ header{
     padding: 0 64px;
   }
 
+  .carousel-arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 220px;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: rgba(13,13,24,0.75);
+    color: var(--accent);
+    cursor: pointer;
+    z-index: 5;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .carousel-arrow svg{
+    width: 20px;
+    height: 20px;
+  }
+
+  .carousel-arrow:hover{
+    background: var(--accent);
+    color: #08070d;
+  }
+
+  .carousel-arrow-left{ left: 6px; }
+  .carousel-arrow-right{ right: 6px; }
+
+  @media (max-width: 900px){
+    .carousel-arrow{ display: none; }
+  }
+
   .carousel{
     display: flex;
     gap: 22px;
@@ -1023,6 +1087,9 @@ header{
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
   }
 
   .modal-close{
@@ -1045,6 +1112,7 @@ header{
   .modal-box iframe{
     width: 100%;
     max-width: 100%;
+    min-height: 560px;
     border-radius: 12px;
   }
 
@@ -1053,6 +1121,9 @@ header{
     h2{ font-size: 27px; }
     .subtitle{ font-size: 19px; }
     .open-form-btn{ padding: 14px 32px; font-size: 14px; }
+    .modal-overlay{ padding: 12px; align-items: flex-start; }
+    .modal-box{ max-height: 88vh; margin-top: 6vh; padding: 18px 14px; }
+    .modal-box iframe{ min-height: 620px; }
   }
 </style>
 </head>
@@ -1083,9 +1154,13 @@ header{
 
       <div class="credentials">
         <div><span>20 лет</span> в банковской сфере, включая руководящие позиции</div>
+        <div class="credential-divider">✦</div>
         <div><span>15+ лет</span> в эзотерике и духовном развитии</div>
+        <div class="credential-divider">✦</div>
         <div>Ченнелинг, работа с энергоструктурами, техника ИВЛ</div>
       </div>
+
+      <div class="meaning-divider">✦</div>
 
       <p class="bio">
         Пятнадцать лет в эзотерике научили видеть то, что скрыто за очевидным.
@@ -1179,6 +1254,11 @@ header{
 
       <div class="result-item">
         <div class="result-number">4</div>
+        <div class="result-text">Исцеление на физическом уровне.</div>
+      </div>
+
+      <div class="result-item">
+        <div class="result-number">5</div>
         <div class="result-text">Счастливая и радостная жизнь.</div>
       </div>
 
@@ -1354,6 +1434,12 @@ header{
   <p class="subtitle">То, что говорят те, кто уже прошёл сессию</p>
 
   <div class="carousel-wrap">
+    <button class="carousel-arrow carousel-arrow-left" onclick="scrollTestimonials(-1)" aria-label="Предыдущие отзывы">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="carousel-arrow carousel-arrow-right" onclick="scrollTestimonials(1)" aria-label="Следующие отзывы">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
     <div class="carousel">
 
       <div class="testimonial-card">
@@ -1577,6 +1663,16 @@ header{
 <script>
   if(!localStorage.getItem('cookieConsent')){
     document.getElementById('cookie-banner').classList.add('show');
+  }
+
+  function scrollTestimonials(direction){
+    var track = document.querySelector('.carousel');
+    if(!track) return;
+    var card = track.querySelector('.testimonial-card');
+    if(!card) return;
+    var gap = 22;
+    var amount = (card.offsetWidth + gap) * direction;
+    track.scrollBy({ left: amount, behavior: 'smooth' });
   }
 </script>
 
