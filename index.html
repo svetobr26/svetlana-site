@@ -1112,6 +1112,7 @@ header{
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     touch-action: pan-y;
@@ -1135,8 +1136,8 @@ header{
   }
 
   .modal-box iframe{
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     min-height: 560px;
     border-radius: 12px;
   }
@@ -1674,7 +1675,7 @@ header{
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('booking-modal').classList.remove('open')">&times;</button>
     <script src="https://forms.yandex.ru/_static/embed.js"></script>
-    <iframe src="https://forms.yandex.ru/u/6a4bdeb2f47e731013a34a46?iframe=1" frameborder="0" name="ya-form-6a4bdeb2f47e731013a34a46" width="650"></iframe>
+    <iframe src="https://forms.yandex.ru/u/6a4bdeb2f47e731013a34a46?iframe=1" frameborder="0" name="ya-form-6a4bdeb2f47e731013a34a46"></iframe>
   </div>
 </div>
 
