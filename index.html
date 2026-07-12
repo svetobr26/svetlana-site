@@ -35,13 +35,19 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html{ scroll-behavior: smooth; color-scheme: dark; }
+  html{ scroll-behavior: smooth; color-scheme: dark; overflow-x: clip; }
 
   body{
     background: var(--bg-gradient);
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     color: var(--text-body);
+    overflow-x: clip;
+    max-width: 100%;
   }
+
+  /* декоративные фоны (.fol-bg, .sri-bg) шире экрана и на телефоне торчат
+     за правый край. Из-за этого браузер расширял холст страницы, и подложка
+     модалки уезжала за пределы видимой области. Обрезаем вылет по краю экрана. */
 
 
   .site-nav{
@@ -1092,12 +1098,16 @@ header{
     display: none;
     position: fixed;
     inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     background: rgba(5,4,10,0.75);
     backdrop-filter: blur(4px);
     z-index: 100;
     align-items: center;
     justify-content: center;
     padding: 24px;
+    overflow-y: auto;
   }
 
   .modal-overlay.open{
@@ -1150,7 +1160,7 @@ header{
     .subtitle{ font-size: 19px; }
     .open-form-btn{ padding: 14px 32px; font-size: 14px; }
     .modal-overlay{ padding: 12px; align-items: flex-start; }
-    .modal-box{ max-height: 88vh; margin-top: 6vh; padding: 18px 14px; }
+    .modal-box{ max-height: 92vh; max-height: 92dvh; margin-top: 2vh; padding: 18px 14px; }
     .modal-box iframe{ min-height: 620px; }
   }
 </style>
